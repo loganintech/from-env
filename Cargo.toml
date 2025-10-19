@@ -1,0 +1,19 @@
+[workspace]
+members = [
+    "from-env-derive",
+    "protoc-gen-from-env",
+]
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/loganintech/from-env"
+
+[workspace.dependencies]
+syn = "2.0"
+quote = "1.0"
+proc-macro2 = "1.0"
+prost = "0.13"
+prost-types = "0.13"
