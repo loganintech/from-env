@@ -1,0 +1,6 @@
+[submodule "from-env-derive"]
+	path = from-env-derive
+	url = git@github.com:loganintech/from-env-derive.git
+[submodule "protoc-gen-from-env"]
+	path = protoc-gen-from-env
+	url = git@github.com:loganintech/protoc-gen-from-env.git
