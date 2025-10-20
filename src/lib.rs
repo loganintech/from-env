@@ -42,6 +42,12 @@ pub trait FromEnvTrait {
         Self: Sized;
 
     fn load_from_env(&mut self) -> Result<(), FromEnvError>;
+
+    fn from_env_with_prefix(prefix: &str) -> Result<Self, FromEnvError>
+    where
+        Self: Sized;
+
+    fn load_from_env_with_prefix(&mut self, prefix: &str) -> Result<(), FromEnvError>;
 }
 
 pub fn parse_env_var<T: std::str::FromStr>(var_name: &str) -> Result<T, FromEnvError>
