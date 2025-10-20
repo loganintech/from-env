@@ -1,0 +1,15 @@
+[package]
+name = "from-env-derive"
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/loganintech/from-env"
+description = "Derive macro for from-env - internal use only"
+
+[lib]
+proc-macro = true
+
+[dependencies]
+syn = { version = "2.0", features = ["full", "extra-traits"] }
+quote = "1.0"
+proc-macro2 = "1.0"
