@@ -48,6 +48,15 @@ pub trait FromEnvTrait {
         Self: Sized;
 
     fn load_from_env_with_prefix(&mut self, prefix: &str) -> Result<(), FromEnvError>;
+
+    /// Internal method for nested struct handling - prefix already includes the full path
+    #[doc(hidden)]
+    fn from_env_with_prefix_internal(prefix: &str) -> Result<Self, FromEnvError>
+    where
+        Self: Sized;
+
+    #[doc(hidden)]
+    fn load_from_env_with_prefix_internal(&mut self, prefix: &str) -> Result<(), FromEnvError>;
 }
 
 pub fn parse_env_var<T: std::str::FromStr>(var_name: &str) -> Result<T, FromEnvError>
