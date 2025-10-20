@@ -1,13 +1,15 @@
+[workspace]
+members = ["from-env-derive"]
+
 [package]
 name = "from-env"
 version = "0.1.0"
 edition = "2021"
-license = "MIT OR Apache-2.0"
 repository = "https://github.com/loganintech/from-env"
 description = "Derive macro for loading struct fields from environment variables"
 keywords = ["environment", "config", "derive", "macro", "protobuf"]
 categories = ["config", "development-tools"]
 
 [dependencies]
-from-env-derive = { path = "from-env-derive", version = "0.1.0" }
 thiserror = "2.0"
+from-env-derive = { path = "from-env-derive" }
