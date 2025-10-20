@@ -1,0 +1,38 @@
+// Example protobuf definition for use with prost-from-env
+syntax = "proto3";
+
+package example;
+
+// Database configuration that can be loaded from environment variables
+message DatabaseConfig {
+  string host = 1;          // DATABASE_CONFIG_HOST
+  uint32 port = 2;          // DATABASE_CONFIG_PORT
+  string database = 3;      // DATABASE_CONFIG_DATABASE
+  string username = 4;      // DATABASE_CONFIG_USERNAME
+  string password = 5;      // DATABASE_CONFIG_PASSWORD
+  bool ssl_enabled = 6;     // DATABASE_CONFIG_SSL_ENABLED
+  uint32 max_connections = 7;  // DATABASE_CONFIG_MAX_CONNECTIONS
+}
+
+// Server configuration
+message ServerConfig {
+  string listen_address = 1;  // SERVER_CONFIG_LISTEN_ADDRESS
+  uint32 port = 2;            // SERVER_CONFIG_PORT
+  bool debug_mode = 3;        // SERVER_CONFIG_DEBUG_MODE
+  float timeout_seconds = 4;  // SERVER_CONFIG_TIMEOUT_SECONDS
+}
+
+// Application configuration combining multiple configs
+message AppConfig {
+  DatabaseConfig database = 1;
+  ServerConfig server = 2;
+  string app_name = 3;        // APP_CONFIG_APP_NAME
+  string version = 4;         // APP_CONFIG_VERSION
+}
+
+// Feature flags
+message FeatureFlags {
+  bool enable_new_ui = 1;         // FEATURE_FLAGS_ENABLE_NEW_UI
+  bool enable_beta_features = 2;  // FEATURE_FLAGS_ENABLE_BETA_FEATURES
+  bool enable_analytics = 3;      // FEATURE_FLAGS_ENABLE_ANALYTICS
+}

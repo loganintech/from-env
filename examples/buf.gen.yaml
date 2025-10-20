@@ -1,0 +1,34 @@
+# Example buf.gen.yaml configuration for using prost-from-env
+# This shows how to automatically add #[derive(FromEnv)] to all generated Rust types
+
+version: v2
+
+# Managed mode - buf handles plugin versions
+managed:
+  enabled: true
+
+plugins:
+  # Generate Rust code using prost
+  - remote: buf.build/prost/plugins/prost:v0.4.0-1
+    out: src/proto
+    opt:
+      # Automatically add FromEnv derive to all generated types
+      - type_attribute=.=#[derive(prost_from_env::FromEnv)]
+
+      # Optionally, you can be more selective:
+      # - type_attribute=.mypackage.Config=#[derive(prost_from_env::FromEnv)]
+      # - type_attribute=.mypackage.Database=#[derive(prost_from_env::FromEnv)]
+
+  # Optional: Generate prost-types for well-known types
+  - remote: buf.build/prost/plugins/prost-types:v0.4.0-1
+    out: src/proto
+
+# Alternative: Local plugin installation
+# If you have protoc-gen-prost installed locally via cargo:
+# cargo install protoc-gen-prost
+#
+# plugins:
+#   - local: protoc-gen-prost
+#     out: src/proto
+#     opt:
+#       - type_attribute=.=#[derive(prost_from_env::FromEnv)]

@@ -1,0 +1,35 @@
+// Example build.rs for using prost-from-env with prost-build
+//
+// To use this in your project:
+// 1. Rename this file to build.rs and place it in your project root
+// 2. Add prost-build to your build dependencies:
+//    [build-dependencies]
+//    prost-build = "0.13"
+// 3. Create a proto/ directory with your .proto files
+// 4. Run `cargo build` and the Rust code will be generated with FromEnv derives
+
+fn main() {
+    // Basic usage: Add FromEnv to all generated types
+    prost_build::Config::new()
+        .type_attribute(".", "#[derive(prost_from_env::FromEnv)]")
+        .compile_protos(&["proto/config.proto"], &["proto/"])
+        .unwrap();
+
+    // Advanced usage: Selective derives
+    // prost_build::Config::new()
+    //     // Add FromEnv to specific message types
+    //     .type_attribute("mypackage.Config", "#[derive(prost_from_env::FromEnv)]")
+    //     .type_attribute("mypackage.DatabaseConfig", "#[derive(prost_from_env::FromEnv)]")
+    //
+    //     // Add FromEnv with custom attributes
+    //     .type_attribute(
+    //         "mypackage.ServerConfig",
+    //         "#[derive(prost_from_env::FromEnv)] #[from_env(prefix = \"APP_\")]"
+    //     )
+    //
+    //     .compile_protos(&["proto/config.proto"], &["proto/"])
+    //     .unwrap();
+
+    // Tell cargo to rerun this build script if the proto files change
+    println!("cargo:rerun-if-changed=proto/");
+}
